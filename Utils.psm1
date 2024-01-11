@@ -52,7 +52,8 @@ function Build-ClashProviderConfig {
 function Build-ClashConfig {
     param (
         $ProviderList,
-        $IsCloud
+        $IsCloud,
+        $WorkerConfig
     )
     $BaseTemplate = Get-Content template/base.yaml -Raw
     $BaseConfig = Get-BaseDefaults
@@ -61,8 +62,34 @@ function Build-ClashConfig {
     $BaseConfig["RulesProviders"] = Add-Padding $(Build-ClashRuleProviders $IsCloud) 0
     $BaseConfig["ProxyProviderNameList"] = Add-Padding $(Build-ClashProxyNameList $ProviderList) 6
     $BaseConfig["ProxyProviderItems"] = Add-Padding $(Build-ProxyProviderItems $ProviderList) 2
+    if ($WorkerConfig.Length -eq 0) {
+        $BaseConfig["Proxies"] = ""
+        $BaseConfig["Cloudflare"] = ""
+    }
+    else {
+        $BaseConfig["Proxies"] = Build-Proxies $WorkerConfig[0] $WorkerConfig[1] $WorkerConfig[2]
+        $BaseConfig["Cloudflare"] = "- cloudflare"
+    }
     
     Build-ConfigString $BaseTemplate $BaseConfig
+}
+
+function Build-Proxies {
+    param (
+        $ServerIp,
+        $UUID,
+        $HeaderHost
+    )
+
+    $Config = @{
+        ServerIp   = $ServerIp
+        UUID       = $UUID
+        HeaderHost = $HeaderHost
+    }
+
+    $ProxiesTemplate = Get-Content template/proxies.yaml -Raw
+
+    Build-ConfigString $ProxiesTemplate $Config
 }
 function Build-ProxyProviderItems {
     param (

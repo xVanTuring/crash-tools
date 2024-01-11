@@ -3,3 +3,4 @@ ruleset
 config.yaml
 config-web.yaml
 proxylist.txt
+worker.txt
