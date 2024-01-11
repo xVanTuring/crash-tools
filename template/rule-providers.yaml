@@ -1,0 +1,91 @@
+rule-providers:
+  reject:
+    type: _RuleType_
+    behavior: domain
+    _Url_reject_
+    path: ./ruleset/reject.txt
+    interval: 86400
+
+  icloud:
+    type: _RuleType_
+    behavior: domain
+    _Url_icloud_
+    path: ./ruleset/icloud.txt
+    interval: 86400
+
+  apple:
+    type: _RuleType_
+    behavior: domain
+    _Url_apple_
+    path: ./ruleset/apple.txt
+    interval: 86400
+
+  google:
+    type: _RuleType_
+    behavior: domain
+    _Url_google_
+    path: ./ruleset/google.txt
+    interval: 86400
+
+  proxy:
+    type: _RuleType_
+    behavior: domain
+    _Url_proxy_
+    path: ./ruleset/proxy.txt
+    interval: 86400
+
+  direct:
+    type: _RuleType_
+    behavior: domain
+    _Url_direct_
+    path: ./ruleset/direct.txt
+    interval: 86400
+
+  private:
+    type: _RuleType_
+    behavior: domain
+    _Url_private_
+    path: ./ruleset/private.txt
+    interval: 86400
+
+  gfw:
+    type: _RuleType_
+    behavior: domain
+    _Url_gfw_
+    path: ./ruleset/gfw.txt
+    interval: 86400
+
+  tld-not-cn:
+    type: _RuleType_
+    behavior: domain
+    _Url_tld_not_cn_
+    path: ./ruleset/tld-not-cn.txt
+    interval: 86400
+
+  telegramcidr:
+    type: _RuleType_
+    behavior: ipcidr
+    _Url_telegramcidr_
+    path: ./ruleset/telegramcidr.txt
+    interval: 86400
+
+  cncidr:
+    type: _RuleType_
+    behavior: ipcidr
+    _Url_cncidr_
+    path: ./ruleset/cncidr.txt
+    interval: 86400
+
+  lancidr:
+    type: _RuleType_
+    behavior: ipcidr
+    _Url_lancidr_
+    path: ./ruleset/lancidr.txt
+    interval: 86400
+
+  applications:
+    type: _RuleType_
+    behavior: classical
+    _Url_applications_
+    path: ./ruleset/applications.txt
+    interval: 86400

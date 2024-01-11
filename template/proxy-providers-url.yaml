@@ -1,0 +1,10 @@
+_ProviderName_:
+  type: http
+  interval: _UpdateInterval_
+  path: ./profiles/proxies/_LocalFileName_.yaml
+  url: _Url_
+  # filter: 'a|b' # golang regex string
+  health-check:
+    enable: _HealthCheckEnable_
+    interval: _HealthCheckInterval_
+    url: http://www.gstatic.com/generate_204

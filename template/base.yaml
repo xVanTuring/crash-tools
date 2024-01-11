@@ -1,0 +1,45 @@
+mixed-port: _Port_
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: info
+external-controller: '0.0.0.0:9999'
+
+proxy-providers:
+_ProxyProviderItems_
+
+proxy-groups:
+  - name: PROXY
+    type: select
+    url: http://www.gstatic.com/generate_204
+    interval: 3600
+    use:
+_ProxyProviderNameList_
+    proxies:
+      - AUTO-SELECT
+      - DIRECT
+  - name: AUTO-SELECT
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 3600
+    use:
+_ProxyProviderNameList_
+_RulesProviders_
+
+rules:
+  - RULE-SET,applications,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,reject,REJECT
+  - RULE-SET,icloud,DIRECT
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,google,DIRECT
+  - RULE-SET,proxy,PROXY
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,cncidr,DIRECT
+  - RULE-SET,telegramcidr,PROXY
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY
