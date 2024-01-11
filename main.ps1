@@ -9,6 +9,9 @@ if (!(Test-Path ".\proxylist.txt")) {
 Write-Output "Parsing proxylist"
 $ProxyListLine = $(Get-Content .\proxylist.txt -Raw).Split("`n")
 for ($i = 0; $i -lt $ProxyListLine.Count; $i++) {
+    if ($ProxyListLine[$i] -eq "") {
+        continue
+    }
     $Line = $ProxyListLine[$i].Split(",")
     $ProxyList += @(, @($Line[0].Trim(), $Line[1].Trim()))
 }
