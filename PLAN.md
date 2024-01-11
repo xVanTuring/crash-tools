@@ -5,10 +5,10 @@
 2. 自动生成 config.yaml
    * 导入 Clash 连接(自动添加flag)
    * 导入 vless, ss 等
-   * 支持命名配置
-   * [proxy-providers](https://wiki.metacubex.one/config/proxy-providers/)
-   * [proxies](https://wiki.metacubex.one/config/proxy-providers/content/)
-   * 支持生成本地和远程两种
+   * [x] 支持命名配置
+   * [x] [proxy-providers](https://wiki.metacubex.one/config/proxy-providers/)
+   * [x] [proxies](https://wiki.metacubex.one/config/proxy-providers/content/)
+   * [x] 支持生成本地和远程两种
 3. 管理 clash.meta
    1. 安装 & 更新
    2. 启动&停止

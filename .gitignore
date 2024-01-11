@@ -1,1 +1,5 @@
 test.ps1
+ruleset
+config.yaml
+config-web.yaml
+proxylist.txt
