@@ -6,7 +6,7 @@ Write-Output "Starting Bench, Please wait"
 Write-Output "Completed!"
 
 $([int64](Get-Date -UFormat %s)) > benchtime
-$WorkConfigPath = "worker.csv"
+$WorkConfigPath = "$OldLocation/worker.csv"
 function Use-Result {
     if (!$(Test-Path -Path result.csv)) {
         return
@@ -15,8 +15,8 @@ function Use-Result {
     if ($IPResults.Length -eq 0) {
         return
     }   
-    Remove-Item $WorkConfigPath
-    $BaseConfigs = Import-Csv worker-base.csv
+    Remove-Item -Force $WorkConfigPath
+    $BaseConfigs = Import-Csv "$OldLocation/worker-base.csv"
     for ($i = 0; $i -lt $IPResults.Count; $i++) {
         $IPAddress = $IPResults[$i]."IP 地址"
         for ($j = 0; $j -lt $BaseConfigs.Count; $j++) {
