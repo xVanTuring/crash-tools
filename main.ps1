@@ -2,19 +2,18 @@ Import-Module -Name .\Utils.psm1
 Import-Module -Name .\RuleSet.psm1
 
 $ProxyList = @()
-if (!(Test-Path ".\proxylist.txt")) {
-    Write-Error "proxylist.txt is not founded"
+if (!(Test-Path ".\proxylist.csv")) {
+    Write-Error "proxylist.csv is not founded"
     return
 }
 Write-Output "Parsing proxylist"
-$ProxyListLine = $(Get-Content .\proxylist.txt -Raw).Split("`n")
-for ($i = 0; $i -lt $ProxyListLine.Count; $i++) {
-    if ($ProxyListLine[$i] -eq "") {
-        continue
-    }
-    $Line = $ProxyListLine[$i].Split(",")
-    $ProxyList += @(, @($Line[0].Trim(), $Line[1].Trim()))
+$ProxyCsv = Import-Csv .\proxylist.csv
+for ($i = 0; $i -lt $ProxyCsv.Count; $i++) {
+
+    $Line = $ProxyCsv[$i]
+    $ProxyList += @(, @($Line.name.Trim(), $Line.url.Trim()))
 }
+
 $ProxyConfig = @()
 if ((Test-Path ".\worker.txt")) {
     $ProxiesLine = $(Get-Content .\worker.txt -Raw).Split("`n")

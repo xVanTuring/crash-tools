@@ -3,4 +3,6 @@ ruleset
 config.yaml
 config-web.yaml
 proxylist.txt
+proxylist.csv
+worker.csv
 worker.txt
