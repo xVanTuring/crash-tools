@@ -83,6 +83,13 @@ rule-providers:
     path: ./ruleset/lancidr.txt
     interval: 86400
 
+  cfcidr:
+      type: _RuleType_
+      behavior: ipcidr
+      _Url_cfcidr_
+      path: ./ruleset/cfcidr.txt
+      interval: 86400
+
   applications:
     type: _RuleType_
     behavior: classical

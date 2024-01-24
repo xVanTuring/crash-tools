@@ -29,6 +29,7 @@ function Get-RuleUrlDefaults {
             Url_cncidr       = "url: https://crash.xvanturing.tech/ruleset/cncidr.txt"
             Url_lancidr      = "url: https://crash.xvanturing.tech/ruleset/lancidr.txt"
             Url_applications = "url: https://crash.xvanturing.tech/ruleset/applications.txt"
+            Url_cfcidr       = "url: https://crash.xvanturing.tech/ruleset/cfcidr.txt"
         }
     }
     return @{
@@ -45,5 +46,6 @@ function Get-RuleUrlDefaults {
         Url_cncidr       = ""
         Url_lancidr      = ""
         Url_applications = ""
+        Url_cfcidr       = ""
     }
 }
