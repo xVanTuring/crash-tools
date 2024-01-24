@@ -1,0 +1,11 @@
+- name: _ProxyName_
+  type: vless
+  server: _ServerIP_
+  port: 80
+  uuid: _UUID_
+  network: ws
+  tls: false
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: _HeaderHost_

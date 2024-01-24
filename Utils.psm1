@@ -63,12 +63,20 @@ function Build-ClashConfig {
     $BaseConfig["ProxyProviderNameList"] = Add-Padding $(Build-ClashProxyNameList $ProviderList) 6
     $BaseConfig["ProxyProviderItems"] = Add-Padding $(Build-ProxyProviderItems $ProviderList) 2
     if ($WorkerConfig.Length -eq 0) {
-        $BaseConfig["Proxies"] = ""
+        $BaseConfig["CFWorkerProxyItems"] = ""
         $BaseConfig["Cloudflare"] = ""
     }
     else {
-        $BaseConfig["Proxies"] = Build-Proxies $WorkerConfig[0] $WorkerConfig[1] $WorkerConfig[2]
-        $BaseConfig["Cloudflare"] = "- cloudflare"
+        $CFWorkerProxyItems = ""
+        $CloudflareNames = ""
+        for ($i = 0; $i -lt $WorkerConfig.Count; $i++) {
+            $Item = $WorkerConfig[$i]
+            $ProxyItem = Build-Proxies $Item[0] $Item[1] $Item[2] $Item[3]
+            $CFWorkerProxyItems += $ProxyItem
+            $CloudflareNames += "- {0}`n" -f $Item[0]
+        }
+        $BaseConfig["CFWorkerProxyItems"] = Add-Padding $CFWorkerProxyItems 2
+        $BaseConfig["Cloudflare"] = Add-Padding $CloudflareNames 6
     }
     
     Build-ConfigString $BaseTemplate $BaseConfig
@@ -76,18 +84,20 @@ function Build-ClashConfig {
 
 function Build-Proxies {
     param (
-        $ServerIp,
+        $ProxyName,
+        $ServerIP,
         $UUID,
         $HeaderHost
     )
 
     $Config = @{
-        ServerIp   = $ServerIp
+        ProxyName  = $ProxyName
+        ServerIP   = $ServerIP
         UUID       = $UUID
         HeaderHost = $HeaderHost
     }
 
-    $ProxiesTemplate = Get-Content template/proxies.yaml -Raw
+    $ProxiesTemplate = Get-Content template/custom-proxies-cf-worker.yaml -Raw
 
     Build-ConfigString $ProxiesTemplate $Config
 }

@@ -15,13 +15,13 @@ for ($i = 0; $i -lt $ProxyCsv.Count; $i++) {
 }
 
 $ProxyConfig = @()
-if ((Test-Path ".\worker.txt")) {
-    $ProxiesLine = $(Get-Content .\worker.txt -Raw).Split("`n")
-    if($ProxiesLine.Length -ge 1){
-        $ProxyConfig = $ProxiesLine[0].Split(",")
+if ((Test-Path ".\worker.csv")) {
+    $WorkerTable = Import-Csv .\worker.csv
+    for ($i = 0; $i -lt $WorkerTable.Count; $i++) {
+        $Item = $WorkerTable[$i]
+        $ProxyConfig += @(, @($("cloudflare {0}" -f $i), $Item.ip, $Item.uuid, $Item.url))
     }
 }
-
 
 Write-Output "Building Config for web"
 Build-ClashConfig $ProxyList $true $ProxyConfig > config-web.yaml
