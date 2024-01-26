@@ -15,9 +15,8 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 3600
     proxies:
+      - PROXY
 _Cloudflare_
-    use:
-_ProxyProviderNameList_
   - name: PROXY
     type: select
     url: http://www.gstatic.com/generate_204
@@ -27,7 +26,6 @@ _ProxyProviderNameList_
     proxies:
       - AUTO-SELECT
       - DIRECT
-_Cloudflare_
   - name: AUTO-SELECT
     type: url-test
     url: http://www.gstatic.com/generate_204
