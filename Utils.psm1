@@ -16,11 +16,11 @@ function Add-Padding {
         return $Lines
     }
     $LineArray = $Lines.Split("`n")
-    $Str = ""
+    $StrList = @()
     for ($i = 0; $i -lt $LineArray.Count; $i++) {
-        $Str += "{0}{1}`n" -f $(" " * $Padding), $LineArray[$i]
+        $StrList += "{0}{1}" -f $(" " * $Padding), $LineArray[$i]
     }
-    $Str
+    $StrList -join "`n"
 }
 function Build-ConfigString {
     param (
@@ -68,13 +68,14 @@ function Build-ClashConfig {
     }
     else {
         $CFWorkerProxyItems = ""
-        $CloudflareNames = ""
+        $CloudflareList = @()
         for ($i = 0; $i -lt $WorkerConfig.Count; $i++) {
             $Item = $WorkerConfig[$i]
             $ProxyItem = Build-Proxies $Item[0] $Item[1] $Item[2] $Item[3]
             $CFWorkerProxyItems += $ProxyItem
-            $CloudflareNames += "- {0}`n" -f $Item[0]
+            $CloudflareList += "- {0}" -f $Item[0]
         }
+        $CloudflareNames = $CloudflareList -join "`n"
         $BaseConfig["CFWorkerProxyItems"] = Add-Padding $CFWorkerProxyItems 2
         $BaseConfig["Cloudflare"] = Add-Padding $CloudflareNames 6
     }
@@ -105,21 +106,21 @@ function Build-ProxyProviderItems {
     param (
         $ProviderList
     )
-    $ListStr = ""
+    $ConfigList = @()
     for ($i = 0; $i -lt $ProviderList.Count; $i++) {
-        $ListStr += "{0}`n" -f $(Build-ClashProviderConfig $ProviderList[$i][0] $ProviderList[$i][1])
+        $ConfigList += $(Build-ClashProviderConfig $ProviderList[$i][0] $ProviderList[$i][1])
     }
-    $ListStr
+    $ConfigList -join "`n"
 }
 function Build-ClashProxyNameList {
     param (
         $ProviderList
     )
-    $ListStr = ""
+    $List = @()
     for ($i = 0; $i -lt $ProviderList.Count; $i++) {
-        $ListStr += "- {0}`n" -f $ProviderList[$i][0]
+        $List += "- {0}" -f $ProviderList[$i][0]
     }
-    $ListStr
+    $List -join "`n"
 }
 
 function Build-ClashRuleProviders {

@@ -17,6 +17,7 @@ proxy-groups:
     proxies:
       - PROXY
 _Cloudflare_
+
   - name: PROXY
     type: select
     url: http://www.gstatic.com/generate_204
@@ -26,12 +27,14 @@ _ProxyProviderNameList_
     proxies:
       - AUTO-SELECT
       - DIRECT
+
   - name: AUTO-SELECT
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 3600
     use:
 _ProxyProviderNameList_
+
 _RulesProviders_
 
 rules:
