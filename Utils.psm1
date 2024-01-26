@@ -1,4 +1,4 @@
-Import-Module -Name .\defaults.psm1
+Import-Module -Name .\defaults.psm1 -Force
 function Get-StringHash {
     param (
         $InputString

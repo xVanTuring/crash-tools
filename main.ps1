@@ -1,5 +1,5 @@
-Import-Module -Name .\Utils.psm1
-Import-Module -Name .\RuleSet.psm1
+Import-Module -Name .\Utils.psm1 -Force
+Import-Module -Name .\RuleSet.psm1 -Force
 
 $ProxyList = @()
 if (!(Test-Path ".\proxylist.csv")) {
