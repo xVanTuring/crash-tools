@@ -7,6 +7,7 @@ function Update-RuleSet {
     }
     $OldLocation = $PWD
     Set-Location $Folder
-    git pull
+    git reset --hard origin/release
+    git pull --ff-only
     Set-Location $OldLocation
 }
